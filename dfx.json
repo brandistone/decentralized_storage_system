@@ -1,0 +1,17 @@
+{
+  "canisters": {
+    "decentralized_file_storage_backend": {
+      "candid": "src/decentralized_file_storage_backend/decentralized_file_storage_backend.did",
+      "package": "decentralized_file_storage_backend",
+      "type": "rust"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

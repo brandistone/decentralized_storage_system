@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "src/decentralized_file_storage_backend"
+]
+resolver = "2"
