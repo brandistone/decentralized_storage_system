@@ -1,3 +1,31 @@
-service : {
-    "greet": (text) -> (text) query;
+type File = record { content : blob; metadata : FileMetadata; name : text };
+type FileMetadata = record {
+  name : text;
+  size : nat64;
+  tags : vec text;
+  file_type : text;
+  version_history : vec text;
+  is_encrypted : bool;
+  last_modified : nat64;
+  upload_timestamp : nat64;
+};
+type Result = variant { Ok : bool; Err : StorageError };
+type Result_1 = variant { Ok : File; Err : StorageError };
+type StorageError = variant {
+  InvalidFileType;
+  SystemError;
+  FileNotFound;
+  FileAlreadyExists;
+  StorageLimit;
+  InvalidOperation;
+};
+service : () -> {
+  create_file_version : (text, blob) -> (Result);
+  delete_file : (text) -> (Result);
+  download_file : (text) -> (Result_1) query;
+  get_file_type_distribution : () -> (vec record { text; nat64 }) query;
+  get_storage_analytics : () -> (nat64, nat64, nat64) query;
+  search_by_tags : (vec text) -> (vec File) query;
+  update_file_metadata : (text, opt vec text) -> (Result);
+  upload_file : (text, blob, text, vec text) -> (Result);
 }
